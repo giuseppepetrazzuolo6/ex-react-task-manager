@@ -5,11 +5,12 @@ export const GlobalContext = createContext()
 
 
 export function GlobalProvider({ children }) {
-    const { tasks, setTasks, addTask, removeTask, updateTask } = useTasks()
+    const taskState = useTasks()
+
 
 
     return (
-        <GlobalContext.Provider value={{ tasks, setTasks, addTask, removeTask, updateTask }}>
+        <GlobalContext.Provider value={taskState}>
             {children}
         </GlobalContext.Provider>
     )

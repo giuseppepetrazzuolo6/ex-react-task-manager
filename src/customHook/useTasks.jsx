@@ -13,9 +13,34 @@ export default function useTasks() {
 
     }, [])
 
-    function addTask() {
-        console.log('new task')
+    async function addTask({ title, description, status }) {
+        try {
+            const res = await fetch(`${apiUrl}/tasks`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title, description, status }),
+            })
+
+            if (!res.ok) {
+                throw new Error("Errore nella richiesta al server")
+            }
+
+            const data = await res.json()
+
+            if (!data.success) {
+                throw new Error(data.message)
+            }
+            setTasks(prev => [...prev, data.task])
+            return data.task
+
+        } catch (err) {
+            console.error("Errore POST /tasks:", err)
+            throw err
+        }
     }
+
     function removeTask() {
         console.log('task rimossa')
     }
@@ -24,7 +49,7 @@ export default function useTasks() {
     }
 
     return {
-        tasks, setTasks, addTask, removeTask, updateTask
+        tasks, setTasks, addTask, removeTask, updateTask, apiUrl
     }
 
 } 

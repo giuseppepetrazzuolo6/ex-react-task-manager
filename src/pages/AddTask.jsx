@@ -1,24 +1,34 @@
 import { useState, useRef } from "react"
+import { useContext } from "react"
+import { GlobalContext } from "../context/GlobalContext"
 
 const symbols = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/`~"
 
 export default function AddTask() {
+    const { addTask } = useContext(GlobalContext)
+
     const [title, setTitle] = useState('')
     const descriptionRef = useRef()
     const statusRef = useRef('To do')
 
     const isTitleValid = title.trim() === '' || [...title].some(c => symbols.includes(c))
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (isTitleValid ||
             descriptionRef.current.value.trim() === '') {
             alert('Compila tutti i campi')
             return
         }
-        console.log(`titolo task: ${title}
-                descrizione task: ${descriptionRef.current.value}
-                stato: ${statusRef.current.value}`)
+        try {
+            await addTask({ title: title.trim(), description: descriptionRef.current.value, status: statusRef.current.value })
+            alert("Task aggiunta!")
+            setTitle("")
+            descriptionRef.current.value = ""
+            statusRef.current.value = "To do"
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
     return (
