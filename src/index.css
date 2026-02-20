@@ -6,6 +6,7 @@ header {
     padding: 20px;
 }
 
+/***** NAVBAR ******/
 .link {
     text-decoration: none;
     margin-left: 20px;
@@ -20,4 +21,23 @@ header {
     font-weight: bold;
     color: rgb(234, 234, 234);
 
+}
+
+/****** TABLE ******/
+.task-table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+tr {
+    border: 1px solid gray;
+}
+
+th {
+    padding: 10px;
+    font-size: 20px;
+}
+
+td {
+    padding: 5px 10px;
 }
