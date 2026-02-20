@@ -1,2 +1,23 @@
 @import url('bootstrap');
 @import url('bootstrap-icons');
+
+header {
+    background-color: rgb(127, 185, 255);
+    padding: 20px;
+}
+
+.link {
+    text-decoration: none;
+    margin-left: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.link-active {
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(234, 234, 234);
+
+}
