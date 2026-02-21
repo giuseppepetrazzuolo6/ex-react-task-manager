@@ -49,7 +49,7 @@ export default function useTasks() {
     }
 
     return {
-        tasks, setTasks, addTask, removeTask, updateTask, apiUrl
+        tasks, setTasks, addTask, removeTask, updateTask
     }
 
 } 
