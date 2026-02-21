@@ -41,9 +41,26 @@ export default function useTasks() {
         }
     }
 
-    function removeTask() {
-        console.log('task rimossa')
+    async function removeTask(taskId) {
+        try {
+            const res = await fetch(`${apiUrl}/tasks/${taskId}`, {
+                method: "DELETE",
+            });
+
+            const data = await res.json()
+
+            if (!data.success) {
+                throw new Error(data.message || "Errore durante l'eliminazione della task");
+            }
+
+            setTasks(prev => prev.filter(t => String(t.id) !== String(taskId)))
+            return true
+        } catch (err) {
+            console.error("Errore DELETE /tasks/🆔", err);
+            throw err;
+        }
     }
+
     function updateTask() {
         console.log('task aggiornata')
     }

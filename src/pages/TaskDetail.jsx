@@ -1,20 +1,41 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { GlobalContext } from "../context/GlobalContext"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 export default function TaskDetails() {
-
+    const navigate = useNavigate()
     const { id } = useParams()
-    const { tasks } = useContext(GlobalContext)
+    const { tasks, removeTask } = useContext(GlobalContext)
 
     const task = tasks.find(t => String(t.id) === String(id))
 
+    if (!task) {
+        return <p>Loading...</p>
+    }
+
+    const handleDelete = async () => {
+        try {
+            await removeTask(id)
+            alert('Task eliminata!')
+            navigate('/')
+        } catch (err) {
+            alert(err.message)
+        }
+
+    }
+
     return (
-        <div className="container">
-            <h2>{task.title}</h2>
-            <p><strong>Description : </strong>{task.description}</p>
-            <p><strong>Status : </strong>{task.status}</p>
-            <p><strong>Data di creazione : </strong>{task.createdAt}</p>
-        </div>
+        <>
+            <div className="container">
+                <h2>{task.title}</h2>
+                <p><strong>Description : </strong>{task.description}</p>
+                <p><strong>Status : </strong>{task.status}</p>
+                <p><strong>Data di creazione : </strong>{task.createdAt}</p>
+                <div>
+                    <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+                </div>
+            </div>
+
+        </>
     )
 }
