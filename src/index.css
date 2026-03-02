@@ -41,3 +41,38 @@ th {
 td {
     padding: 5px 10px;
 }
+
+/***** MODAL *****/
+
+.modal-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 16px;
+
+}
+
+.modal {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    min-width: 300px;
+    position: relative;
+    z-index: 100000;
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    max-height: 30vh;
+    overflow: auto;
+    box-sizing: border-box;
+    text-align: center;
+
+    button {
+        margin-right: 5px;
+        margin-top: 15px;
+    }
+}
